@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import pokebola from "../../assets/pokebola.png";
 import entrenador from "../../assets/entrenador.png";
@@ -12,6 +12,7 @@ import Detalle from "./Detalle";
 // componentes puedan consumir un estado global.
 
 const Formulario = () => {
+
   return (
     <>
       <header className="form-header">
@@ -49,7 +50,7 @@ const Formulario = () => {
                 <img src={pikachu} alt="pikachu" />
                 <span>POKEMON</span>
               </p>
-              <Input name="nombrePokemon" label="Nombre" />
+              <Input name="nombrePokemon" label="NombrePokemon" />
             </div>
           </div>
           <Detalle />
