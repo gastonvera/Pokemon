@@ -1,21 +1,14 @@
-// Aqui debemos crear nuestro contexto y nuestro provider.
-
-import { createContext, useState } from "react";
+import { createContext, useReducer } from "react";
+import PokemonReducer, { initialPokemonState } from "../reducers/PokemonReducer";
 
 export const FormularioContext = createContext();
 
-const initialPokemonState = {
-    Nombre: "",
-    Apellido: "",
-    Email: "",
-    NombrePokemon: ""
-}
-
 const FormularioContextProvider = ({ children }) => {
-    const [form, setForm] = useState(initialPokemonState);
+    const [form, dispatch] = useReducer(PokemonReducer, initialPokemonState)
 
+    
     return (
-        <FormularioContext.Provider value={{ form, setForm }}>
+        <FormularioContext.Provider value={{ form, dispatch }}>
             {children}
         </FormularioContext.Provider>
     )

@@ -1,13 +1,9 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { FormularioContext } from "../../context/ContextoFormulario";
-
-
+import { types } from "../../reducers/PokemonReducer";
 
 const Input = ({ name, label, type = "text" }) => {
-  // Aqui deberíamos acceder al estado global para poder obtener los datos
-  // del formulario y una manera de actualizar los mismos.
-  const {form, setForm} = useContext(FormularioContext);
-  // También, utilizaremos un estado local para manejar el estado del input.
+  const { dispatch } = useContext(FormularioContext);
   const [pokemonField, setPokemonField] = useState("")
 
   const onChange = (e) => {
@@ -16,12 +12,19 @@ const Input = ({ name, label, type = "text" }) => {
 
   const onBlur = (e) => {
     e.preventDefault();
-
-    // Aqui deberíamos actualizar el estado global con los datos de
-    // cada input.
-    // TIP: Podemos utilizar el nombre de cada input para guardar
-    // los datos en el estado global usando una notación de { clave: valor }
-    setForm({...form, [label]: pokemonField})
+    if (name === "nombreEntrenador" || name === "apellidoEntrenador" || name === "emailEntrenador") {
+      dispatch({
+        type: types.ACTUALIZAR_ENTRENADOR,
+        key: label,
+        value: pokemonField
+      })
+    } else {
+      dispatch({
+        type: types.ACTUALIZAR_POKEMON,
+        key: label,
+        value: pokemonField
+      })
+    }
   };
 
   return (
