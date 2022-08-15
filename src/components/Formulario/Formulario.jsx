@@ -1,10 +1,16 @@
-import React, {useState} from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import pokebola from "../../assets/pokebola.png";
 import entrenador from "../../assets/entrenador.png";
 import pikachu from "../../assets/pikachu.png";
 import Input from "../Input/Input";
 import Detalle from "./Detalle";
+
+/**
+ * This is the component for pokemon's form 
+ * @returns {Component}
+ * 
+ */
 
 const Formulario = () => {
 

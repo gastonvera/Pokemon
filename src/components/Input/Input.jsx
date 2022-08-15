@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FormularioContext } from "../../context/ContextoFormulario";
 import { types } from "../../reducers/PokemonReducer";
+import PropTypes from 'prop-types';
 
 const Input = ({ name, label, type = "text" }) => {
   const { dispatch } = useContext(FormularioContext);
@@ -15,14 +16,16 @@ const Input = ({ name, label, type = "text" }) => {
     if (name === "nombreEntrenador" || name === "apellidoEntrenador" || name === "emailEntrenador") {
       dispatch({
         type: types.ACTUALIZAR_ENTRENADOR,
-        key: label,
-        value: pokemonField
+        payload: {
+          [label]: pokemonField
+        }
       })
     } else {
       dispatch({
         type: types.ACTUALIZAR_POKEMON,
-        key: label,
-        value: pokemonField
+        payload: {
+          [label]: pokemonField
+        }
       })
     }
   };
@@ -40,5 +43,11 @@ const Input = ({ name, label, type = "text" }) => {
     </div>
   );
 };
+
+Input.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string
+}
 
 export default Input;

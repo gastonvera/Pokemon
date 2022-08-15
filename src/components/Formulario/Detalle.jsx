@@ -1,6 +1,12 @@
 import React, { useContext } from "react";
 import { FormularioContext } from "../../context/ContextoFormulario";
 
+/**
+ * This is the component for pokemon form's details 
+ * @returns {Component}
+ *
+ */
+
 const Detalle = () => {
 
   const {form} = useContext(FormularioContext);

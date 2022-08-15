@@ -2,6 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import pokebola from "../../assets/pokebola.png";
 
+/**
+ * 
+ * @returns {Component}
+ */
+
 const Home = () => {
   return (
     <header className="App-header">

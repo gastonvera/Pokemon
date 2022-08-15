@@ -19,28 +19,35 @@ export const types = {
   BORRAR_FORM: "BORRAR_FORM",
 };
 
+/**
+ * This is the function's first argument for pokemon's form state
+ * @param object
+ * @param object
+ * @returns {object}
+ */
+
 const PokemonReducer = (state, action) => {
   switch (action.type) {
     case types.ACTUALIZAR_ENTRENADOR:
       return {
         ...state,
         Entrenador: {
-            ...state.Entrenador,
-          [action.key]: action.value,
+          ...state.Entrenador,
+          ...action.payload,
         },
       };
     case types.ACTUALIZAR_POKEMON:
       return {
         ...state,
         Pokemon: {
-            ...state.Pokemon,
-          [action.key]: action.value,
+          ...state.Pokemon,
+          ...action.payload,
         },
       };
-      case types.BORRAR_FORM:
-        return {
-            ...initialPokemonState
-          };
+    case types.BORRAR_FORM:
+      return {
+        ...initialPokemonState,
+      };
     default:
       return state;
   }
