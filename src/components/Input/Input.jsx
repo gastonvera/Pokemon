@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { FormularioContext } from "../../context/ContextoFormulario";
 import { types } from "../../reducers/PokemonReducer";
 import PropTypes from 'prop-types';
+import { useQuery } from "react-query";
+import { getTypesPokemons } from "../../service/pokemon.service";
 
 const Input = ({ name, label, type = "text" }) => {
   const { dispatch } = useContext(FormularioContext);
@@ -10,6 +12,9 @@ const Input = ({ name, label, type = "text" }) => {
   const onChange = (e) => {
     setPokemonField(e.target.value)
   };
+
+  const { isLoading, error, data } = useQuery("typesPokemons", getTypesPokemons);
+
 
   const onBlur = (e) => {
     e.preventDefault();
@@ -31,16 +36,26 @@ const Input = ({ name, label, type = "text" }) => {
   };
 
   return (
-    <div className="input-contenedor">
-      <label htmlFor={name}>{label}</label>
-      <input
-        type={type}
-        value={pokemonField}
-        id={name}
-        onChange={onChange}
-        onBlur={onBlur}
-      />
-    </div>
+    type === "select" ?
+      <div className="input-contenedor">
+        <label htmlFor={name}>{label}</label>
+        <select value={pokemonField} onChange={onChange} onBlur={onBlur} id={name}>
+          {data?.results.map((type, index) => {
+            return <option key={index} value={type.name}>{type.name}</option>
+          })}
+        </select>
+      </div>
+      :
+      <div className="input-contenedor">
+        <label htmlFor={name}>{label}</label>
+        <input
+          type={type}
+          value={pokemonField}
+          id={name}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+      </div>
   );
 };
 
